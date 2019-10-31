@@ -6,6 +6,14 @@ boolean squared = false, lastsquared = true ;  // toggle with 'q'
 // Parson comment - since squared and linear are mutually exclusive, I am
 // replacing linear with (! squared), also keep track of previous state in
 // lastquared to eliminate some screen glitch. Make them opposite at startup.
+boolean one = false;  
+boolean two = false; 
+boolean three = false; 
+boolean four = false; 
+boolean five = false; 
+boolean six = false; 
+boolean seven = false; 
+boolean eight = false; 
   
 void keyPressed() {
   interpretKey(key, keyCode);
@@ -113,26 +121,6 @@ void moveCameraRotateWorldKeys() {
 // interpretKey can interpret single-character key commands
 // from keyPressed() or a single-char OSC message.
 void interpretKey(char key, int keyCode) {
-  /*if (squared) {
-    noFill();
-    //stroke(0);
-    //strokeWeight(2);
-    // Draw orbits as circles for now, just to get the feel.
-    double maxWidth = width-10.0 ;
-    double linearRatio = maxWidth / orbits[orbits.length-1];
-    double sqrtMax = Math.sqrt(orbits[orbits.length-1]);
-    for (int i = 0 ; i < orbits.length ; i++) {
-      float linearDistance = (float)(linearRatio*orbits[i]);
-      float sqrtDistance = (float)((Math.sqrt(orbits[i])/sqrtMax) * maxWidth) ;
-      if (usingSqrt) {
-        ellipse(0, 0, sqrtDistance, sqrtDistance);
-      //  bodies.set(Planet(1)) = sqrtDistance;
-      } 
-      else {
-        ellipse(0, 0, linearDistance, linearDistance);
-      }
-    }
-  } */
   //turns on/off squared scale 
     if (key == 'q') {
       squared = true ;
@@ -150,10 +138,74 @@ void interpretKey(char key, int keyCode) {
      squared = false ; 
    }
    else if (key == 'R') { // Reset POV to starting point.
-    xeye = width / 2 ;
-    yeye = height / 2 ;
-    zeye = (height*2) /* / tan(PI*30.0 / 180.0) */ ;
-    worldxrotate = worldyrotate = 0 ;
+     xeye = width / 2 ;
+     yeye = height / 2 ;
+     zeye = (height*2) /* / tan(PI*30.0 / 180.0) */ ;
+     worldxrotate = worldyrotate = 0 ;
+   }
+   else if (key == '1') { 
+     if(one == true){
+       one = false; 
+     }
+     else if(one == false) {
+       one = true;
+     }
+   }
+   else if (key == '2') { 
+     if(two == true){
+       two = false; 
+     }
+     else if(two == false) {
+       two = true;
+     }
+   }
+   else if (key == '3') { 
+     if(three == true){
+       three = false; 
+     }
+     else if(three == false) {
+       three = true;
+     }
+   }
+   else if (key == '4') { 
+     if(four == true){
+       four = false; 
+     }
+     else if(four == false) {
+       four = true;
+     }
+   }
+   else if (key == '5') { 
+     if(five == true){
+       five = false; 
+     }
+     else if(five == false) {
+       five = true;
+     }
+   }
+   else if (key == '6') { 
+     if(six == true){
+       six = false; 
+     }
+     else if(six == false) {
+       six = true;
+     }
+   }
+   else if (key == '7') { 
+     if(seven == true){
+       seven = false; 
+     }
+     else if(seven == false) {
+       seven = true;
+     }
+   }
+   else if (key == '8') { 
+     if(eight == true){
+       eight = false; 
+     }
+     else if(eight == false) {
+       eight = true;
+     }
    }
    /* Parson - moving this logic to draw() to get the effects of ots translate()
       and rotate[X|Y|Z]

@@ -20,6 +20,7 @@ int xcenterOfOrbits, ycenterOfOrbits ; // default width/2, height/2
 LinkedList<Planet> bodies = new LinkedList<Planet>();
 
 int size = 10;
+int numOne, numTwo, numThree, numFour, numFive, numSix, numSeven, numEight;
 
 //Planet Distance in km
 float mercury = 59223859.2;
@@ -71,53 +72,35 @@ void setup() {
   yeye = height / 2 ;
   zeye = (height*2) /* / tan(PI*30.0 / 180.0) */ ;
   
-  /*
-    Planet(int Hue, int Sat, int Bright, float mass, float size, float speed,
-      float directionx, float directiony, float locationx, float locationy,
-      boolean isInOrbit, int stepInOrbit, float xOrbitDistanceFromSun,
-      float yOrbitDistanceFromSun, float orbitAngle) {
-  */
-  // make them dark to test the ellipse show-thru bug.
-  //Sun
-/*  bodies.add(new Planet(57, 95, 99, 1.0, 100.0, -.75, 1.0, 1.0, 1.0, 1.0,
-    true, 0, 0, 0, 0));
-  //Mercury 
-  bodies.add(new Planet(31, 61, 66, 1.0, 20.0, -4.787, 1.0, 1.0, 1.0, 1.0,
-    true, 0, width/15, height/10, HALF_PI / -20.0));
-  //Venus
-  bodies.add(new Planet(31, 92, 81, 1.0, 32.0, -3.502, 1.0, 1.0, 1.0, 1.0,
-    true, stepsInUnitCircle/4, width/11, height/8, HALF_PI / -20.0));
-  //Earth
-  bodies.add(new Planet(205, 76, 94, 1.0, 34.0, -2.978, 1.0, 1.0, 1.0, 1.0,
-    true, stepsInUnitCircle/3, width/8, height/6, HALF_PI / -20.0));
-  //Mars
-  bodies.add(new Planet(10, 90, 80, 1.0, 30.0, -2.4077, 1.0, 1.0, 1.0, 1.0,
-    true, stepsInUnitCircle/2, width/7 + 30, height/5 + 10, HALF_PI / -20.0));
-  //Jupiter
-  bodies.add(new Planet(41, 64, 88, 1.0, 70.0, -1.307, 1.0, 1.0, 1.0, 1.0,
-    true, stepsInUnitCircle/3, width/6 + 100, height/4 + 50, HALF_PI / -20.0));
-  //Saturn
-  bodies.add(new Planet(53, 75, 91, 1.0, 60.0, -.969, 1.0, 1.0, 1.0, 1.0,
-    true, stepsInUnitCircle/6, width/5 + 200, height/3 + 100, HALF_PI / -20.0));
-  //Uranus 
-  bodies.add(new Planet(181, 35, 97, 1.0, 45.0, -.681, 1.0, 1.0, 1.0, 1.0,
-    true, stepsInUnitCircle/5, width/4 + 250, height/2 + 20, HALF_PI / -20.0));
-  //Neptune
-  bodies.add(new Planet(220, 79, 91, 1.0, 40.0, -.543, 1.0, 1.0, 1.0, 1.0,
-    true, stepsInUnitCircle/4, width/3 + 220, height/2 + 120, HALF_PI / -20.0));  */ 
 }
 
 void draw() {
   background(0);
   pushMatrix();
-  // Parson - I moved these here so they come up first time OK, rebuild only as needed.
+  // Parson - I moved these here so they come up first time OK, rebuild only as needed. 
   if(squared && ! lastsquared) {
     bodies.clear();
+    onePlanet();
+    twoPlanet();
+    threePlanet();
+    fourPlanet();
+    fivePlanet();
+    sixPlanet();
+    sevenPlanet();
+    eightPlanet();
     Sqrt();
     lastsquared = true ;
   }
   else if((!squared) && lastsquared) {
     bodies.clear();
+    onePlanet();
+    twoPlanet();
+    threePlanet();
+    fourPlanet();
+    fivePlanet();
+    sixPlanet();
+    sevenPlanet();
+    eightPlanet();
     Linear(); 
     lastsquared = false ;
   }
@@ -150,6 +133,7 @@ void Sqrt() {
     float sqrtDistance = (float)((Math.sqrt(orbits[i])/sqrtMax) * maxWidth) ;
     float sqrtDiameter = (float)((Math.sqrt(diameter[i])/diaMax)* diaWidth); 
       ellipse(0, 0, sqrtDistance, sqrtDistance);
+      println("i is: " + i);
       /*
       Planet(int Hue, int Sat, int Bright, float mass, float size, float speed,
       float directionx, float directiony, float locationx, float locationy,
@@ -161,42 +145,43 @@ void Sqrt() {
       bodies.add(new Planet(57, 95, 99, 1.0, sqrtDiameter, -.75, 1.0, 1.0, 1.0, 1.0,
         true, 0, 0, 0, 0));
       }
-      if(i == 1) {
+      else if(i == 1 && numOne == 1) {
+        println("In Mercury Sqrt");
       //Mercury 
       bodies.add(new Planet(31, 61, 66, 1.0, sqrtDiameter, -4.787, 1.0, 1.0, 1.0, 1.0,
         true, 0, sqrtDistance, sqrtDistance, HALF_PI / -20.0));
       }
-      if(i == 2) {
+      else if(i == 2 && numTwo == 2) {
       //Venus
       bodies.add(new Planet(31, 92, 81, 1.0, sqrtDiameter, -3.502, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/4, sqrtDistance, sqrtDistance, HALF_PI / -20.0));
       }
-      if(i == 3) {
+      else if(i == 3 && numThree == 3) {
       //Earth
       bodies.add(new Planet(205, 76, 94, 1.0, sqrtDiameter, -2.978, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/3, sqrtDistance, sqrtDistance, HALF_PI / -20.0));
       }
-      if(i == 4) {
+      else if(i == 4 && numFour == 4) {
       //Mars
       bodies.add(new Planet(10, 90, 80, 1.0, sqrtDiameter, -2.4077, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/2, sqrtDistance, sqrtDistance, HALF_PI / -20.0));
       }
-      if(i == 5) {
+      else if(i == 5 && numFive == 5) {
       //Jupiter
       bodies.add(new Planet(41, 64, 88, 1.0, sqrtDiameter, -1.307, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/3, sqrtDistance, sqrtDistance, HALF_PI / -20.0));
       }
-      if(i == 6) {
+      else if(i == 6 && numSix == 6) {
       //Saturn
       bodies.add(new Planet(53, 75, 91, 1.0, sqrtDiameter, -.969, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/6, sqrtDistance, sqrtDistance, HALF_PI / -20.0));
       }
-      if(i == 7) {
+      else if(i == 7 && numSeven == 7) {
       //Uranus 
       bodies.add(new Planet(181, 35, 97, 1.0, sqrtDiameter, -.681, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/5, sqrtDistance, sqrtDistance, HALF_PI / -20.0));
       }
-      if(i == 8) {
+      else if(i == 8 && numEight == 8) {
       //Neptune
       bodies.add(new Planet(220, 79, 91, 1.0, sqrtDiameter, -.543, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/4, sqrtDistance, sqrtDistance, HALF_PI / -20.0));
@@ -228,42 +213,42 @@ void Linear() {
       bodies.add(new Planet(57, 95, 99, 1.0, linearDiameter, -.75, 1.0, 1.0, 1.0, 1.0,
         true, 0, linearDistance, linearDistance, 0));
       }
-      if(i == 1) {
+      if(i == 1 && numOne == 1) {
       //Mercury 
       bodies.add(new Planet(31, 61, 66, 1.0, linearDiameter, -4.787, 1.0, 1.0, 1.0, 1.0,
         true, 0, linearDistance + sunDiameter, linearDistance + sunDiameter, HALF_PI / -20.0));
       }
-      if(i == 2) {
+      if(i == 2 && numTwo == 2) {
       //Venus
       bodies.add(new Planet(31, 92, 81, 1.0, linearDiameter, -3.502, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/4, linearDistance + sunDiameter, linearDistance + sunDiameter, HALF_PI / -20.0));
       }
-      if(i == 3) {
+      if(i == 3 && numThree == 3) {
       //Earth
       bodies.add(new Planet(205, 76, 94, 1.0, linearDiameter, -2.978, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/3, linearDistance + sunDiameter, linearDistance + sunDiameter, HALF_PI / -20.0));
       }
-      if(i == 4) {
+      if(i == 4 && numFour == 4) {
       //Mars
       bodies.add(new Planet(10, 90, 80, 1.0, linearDiameter, -2.4077, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/2, linearDistance + sunDiameter, linearDistance + sunDiameter, HALF_PI / -20.0));
       }
-      if(i == 5) {
+      if(i == 5 && numFive == 5) {
       //Jupiter
       bodies.add(new Planet(41, 64, 88, 1.0, linearDiameter, -1.307, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/3, linearDistance + sunDiameter, linearDistance + sunDiameter, HALF_PI / -20.0));
       }
-      if(i == 6) {
+      if(i == 6 && numSix == 6) {
       //Saturn
       bodies.add(new Planet(53, 75, 91, 1.0, linearDiameter, -.969, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/6, linearDistance + sunDiameter, linearDistance + sunDiameter, HALF_PI / -20.0));
       }
-      if(i == 7) {
+      if(i == 7 && numSeven == 7) {
       //Uranus 
       bodies.add(new Planet(181, 35, 97, 1.0, linearDiameter, -.681, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/5, linearDistance + sunDiameter, linearDistance + sunDiameter, HALF_PI / -20.0));
       }
-      if(i == 8) {
+      if(i == 8 && numEight == 8) {
       //Neptune
       bodies.add(new Planet(220, 79, 91, 1.0, linearDiameter, -.543, 1.0, 1.0, 1.0, 1.0,
         true, stepsInUnitCircle/4, linearDistance + sunDiameter, linearDistance + sunDiameter, HALF_PI / -20.0));
@@ -272,4 +257,74 @@ void Linear() {
   popMatrix();
 }
 
-      
+void onePlanet() {
+  if(one == true) {
+    numOne = 1;
+  }
+  else if(one == false) {
+    numOne = 0;
+  }
+}
+
+void twoPlanet() {
+  if(two == true) {
+    numTwo = 2;
+  }
+  else if(two == false) {
+    numTwo = 0;
+  }
+}
+
+void threePlanet() {
+  if(three == true) {
+    numThree = 3;
+  }
+  else if(three == false) {
+    numThree = 0;
+  }
+}
+
+void fourPlanet() {
+  if(four == true) {
+    numFour = 4;
+  }
+  else if(four == false) {
+    numFour = 0;
+  }
+}
+
+void fivePlanet() {
+  if(five == true) {
+    numFive = 5;
+  }
+  else if(five == false) {
+    numFive = 0;
+  }
+}
+
+void sixPlanet() {
+  if(six == true) {
+    numSix = 6;
+  }
+  else if(six == false) {
+    numSix = 0;
+  }
+}
+
+void sevenPlanet() {
+  if(seven == true) {
+    numSeven = 7;
+  }
+  else if(seven == false) {
+    numSeven = 0;
+  }
+}
+
+void eightPlanet() {
+  if(eight == true) {
+    numEight = 8;
+  }
+  else if(eight == false) {
+    numEight = 0;
+  }
+}
